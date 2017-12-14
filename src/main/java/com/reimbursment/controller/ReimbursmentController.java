@@ -22,6 +22,7 @@ public class ReimbursmentController {
 
 	@RequestMapping(value = "/{receptId}", method = RequestMethod.GET)
 	public @ResponseBody Reimbursment getReimbursment(@PathVariable String receptId) {
+		System.out.println(receptId);
 		Reimbursment e = reimbursmentService.getReimbursment(receptId);
 		return e;
 	}
