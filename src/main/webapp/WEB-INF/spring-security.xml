@@ -7,8 +7,8 @@
 	http://www.springframework.org/schema/security/spring-security-3.2.xsd">
 
 	<http use-expressions="true" entry-point-ref="grsAuthenticationEntryPoint">
-        <intercept-url pattern="/*" />
-        <http-basic/>
+        <intercept-url pattern="/**" access="isAuthenticated()"/>
+        <http-basic />
     </http>
  
     <authentication-manager>
@@ -16,7 +16,4 @@
           ref="grsAuthenticationProvider" />
     </authentication-manager>
     
-    <beans:bean name="grsAuthenticationProvider" class="com.reimbursment.security.GrsAuthenticationProvider"/>
-    <beans:bean name="grsAuthenticationEntryPoint" class="com.reimbursment.security.GrsAuthenticationEntryPoint"/>
-
 </beans:beans>

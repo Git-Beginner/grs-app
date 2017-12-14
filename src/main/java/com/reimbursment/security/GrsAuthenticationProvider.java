@@ -2,29 +2,35 @@ package com.reimbursment.security;
 
 import java.util.ArrayList;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationProvider;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
+import org.springframework.stereotype.Component;
+
+import com.reimbursment.model.User;
+import com.reimbursment.service.IAuthenticationService;
 
 
-
+@Component
 public class GrsAuthenticationProvider implements AuthenticationProvider {
  
+	@Autowired
+	private IAuthenticationService authService;
+	
     @Override
     public Authentication authenticate(Authentication authentication) 
       throws AuthenticationException {
-  
-        String name = authentication.getName();
+        String userName = authentication.getName();
         String password = authentication.getCredentials().toString();
-        System.out.println(name);
-        System.out.println(password);
-        if (true) {
-  
+        User user = authService.authenticate(userName, password);
+        if (user != null) {
             return new UsernamePasswordAuthenticationToken(
-              name, password, new ArrayList());
+            		userName, password, new ArrayList());
         } else {
-            return null;
+            throw new BadCredentialsException("Invalid Login");
         }
     }
  
