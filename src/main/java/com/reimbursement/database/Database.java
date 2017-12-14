@@ -10,6 +10,11 @@ import java.util.Map;
 import com.reimbursment.model.Reimbursment;
 import com.reimbursment.model.User;
 
+/**
+ * This class serve as a source of Data
+ * @author rtiwary
+ *
+ */
 public class Database {
 	
 	public static Map<String, Reimbursment> mapOfReimbursments = new HashMap<String, Reimbursment>();
